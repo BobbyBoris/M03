@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Punny Web</title>
+  <style>
+    @font-face {
+        font-family: "Porter";
+        src: url(./Porter\ Bold\ DEMO\ 700.ttf);
+    }
+    body {
+        height: 100%;
+        background: linear-gradient(to bottom left, #2c8e0e 20%, #c7f024 100%);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        text-align: center;
+        margin: 60px 250px;
+    }
+    h1 {
+        font-family: "Porter";
+        color: #133d06;
+    }
+    p {
+        font-family: Arial, Helvetica, sans-serif;
+        color: black;
+        font-weight: bold;
+    }
+    img {
+      height: 300px;
+      width: 400px;
+    }
+  </style>
+</head>
+<body>
+    <h1>Punny web</h1>
+    <p id="author"></p>
+    <img src="" alt="" id="gambar">
+
+    <script>
+    let show = function(data){
+    let arr = JSON.parse(data);
+    arr = arr[0];
+    document.getElementById("gambar").src = arr.download_url;
+    document.getElementById("author").innerHTML = arr.author;
+    }
+    let load = function(){
+    let link = "https://picsum.photos/v2/list?page=2&limit=1";
+    let xhr;
+    xhr = new XMLHttpRequest();
+    try{
+        xhr = new XMLHttpRequest();
+        if (!xhr)return -1;
+        xhr.onreadystatechange = function(){
+        if (xhr.readyState === 4 && xhr.status === 200){
+            show(xhr.responseText);
+        }
+        };
+        xhr.open('GET', link);
+        xhr.send();
+    }
+        catch (e){
+        console.log(e)
+    }
+    }
+    load();
+    </script>
+</body>
+</html>
